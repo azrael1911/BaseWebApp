@@ -27,6 +27,10 @@ public class RegisterController {
         JSONObject userinfo = new JSONObject(request.getParameter("json"));
         System.out.println(userinfo.toString());
         JSONObject jobj = new JSONObject();
+
+        // 添加用户
+        irs.addUser();
+
         jobj.put("info", true);
         jobj.put("msg", "用户注册成功,请重新登录!");
         Logs.info("用户登录成功!");
