@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+	<head>
+		<title>设备管理系统</title>
+
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <meta name="renderer" content="webkit">
+	    <meta http-equiv="Cache-Control" content="no-siteapp">
+	    <meta name="description" content="设备管理系统">
+
+	    <!--[if lt IE 9]>
+	    <meta http-equiv="refresh" content="0;../pages/ie.html" />
+	    <![endif]-->
+
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" href="../css/bootstrap.css" >
+		<link rel="stylesheet" href="../css/font-awesome.css" >
+		<link rel="stylesheet" href="../css/animate.css" >
+		<link rel="stylesheet" href="../css/style.css" >
+	</head>
+
+	<body class="fixed-sidebar full-height-layout gainsboro-bg skin-3" style="overflow:hidden">
+	    <div id="wrapper">
+	        <!--左侧导航开始-->
+	        <nav class="navbar-default navbar-static-side" role="navigation">
+	            <div class="nav-close">
+	            	<i class="fa fa-times-circle"></i>
+	            </div>
+	            
+	            <div class="sidebar-collapse">
+	                <ul class="nav" id="side-menu">
+	                    <!-- 用户资料 开始 -->
+	                    <li class="nav-header">
+	                        <div class="dropdown profile-element">
+	                            <span><img alt="image" class="img-circle" src="../img/profile_small.jpg" /></span>
+	                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	                                <span class="clear">
+		                                <span class="block m-t-xs">
+		                                	<strong id="userName" class="font-bold">Admin</strong>
+		                                </span>
+		                                <span id="user" class="text-muted text-xs block">控制面板
+		                                	<b class="caret"></b>
+		                                </span>
+	                                </span>
+	                            </a>
+	                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+	                                <li>
+	                                	<a class="J_menuItem" href="form_avatar.html">
+	                                		<i class="fa fa-picture-o" aria-hidden="true"></i><span class="tab">&nbsp;&nbsp;修改头像</span>
+	                                	</a>
+	                                </li>
+	                                <li>
+	                                	<a class="J_menuItem" href="profile.html">
+	                                		<i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp;&nbsp;个人资料
+	                                	</a>
+	                                </li>
+	                                <li class="divider"></li>
+	                                <li>
+	                                	<a href="/">
+	                                		<i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;安全退出
+	                                	</a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        <div class="logo-element">
+	                        	<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+	                        </div>
+	                    </li>
+	                    <!-- 用户资料 结束 -->
+	                    
+	                    <!-- 菜单列表 开始 -->
+	                    <li>
+	                    	<a class="J_menuItem" href="index_v1.html" data-index="0">
+	                        	<i class="fa fa-home"></i>
+	                        	<span class="nav-label">首页</span>
+	                        </a>
+	                    </li>
+	                    <!-- <li>
+	                        <a class="J_menuItem" href="layouts.html">
+	                        	<i class="fa fa-columns"></i>
+	                        	<span class="nav-label">布局</span>
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a class="J_menuItem" href="css_animation.html">
+	                        	<i class="fa fa-magic"></i> 
+	                        	<span class="nav-label">CSS动画</span>
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#">
+	                        	<i class="fa fa-cutlery"></i>
+	                        	<span class="nav-label">工具 </span>
+	                        	<span class="fa arrow"></span>
+	                        </a>
+	                        <ul class="nav nav-second-level">
+	                            <li>
+	                            	<a class="J_menuItem" href="form_builder.html">表单构建器</a>
+	                            </li>
+	                        </ul>
+	                    </li> -->
+	                    <!-- 菜单列表 结束 -->
+	                </ul>
+	            </div>
+	        </nav>
+	        <!--左侧导航结束-->
+	        
+	        <!--右侧部分开始-->
+	        <div id="page-wrapper" class="gainsboro-bg dashbard-1">
+	        	<!-- 导航条开始 -->
+	            <div class="row">
+	                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+	                    
+	                    <!-- 左侧开关开始 -->
+	                    <div class="navbar-header">
+	                    	<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" onclick="clickSideMenu()">
+	                    		<i id="fa-outdent" class="fa fa-outdent" aria-hidden="true"></i>
+	                    	</a>
+	                    </div>
+	                    <!-- 左侧开关结束 -->
+	                    
+	                    <!-- 右侧工具开始 -->
+	                    <ul class="nav navbar-top-links navbar-right">
+	                        <!-- 邮件开始 -->
+	                        <li class="dropdown">
+	                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+	                                <i class="fa fa-envelope"></i>
+	                                <span class="label label-warning">1</span>
+	                            </a>
+	                            <ul class="dropdown-menu dropdown-messages">
+	                                <li>
+	                                    <div class="link-block">
+	                                        <a class="J_menuItem" href="mailbox.html">
+	                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;
+	                                            <strong>查看收件箱</strong>
+	                                            <span class="label label-warning">1</span>
+	                                        </a>
+	                                    </div>
+	                                </li>
+	                                <li class="divider"></li>
+	                                <li>
+	                                    <div class="link-block">
+	                                        <a class="J_menuItem" href="mail_detail.html">
+	                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;
+	                                            <strong>查看邮件</strong>
+	                                        </a>
+	                                    </div>
+	                                </li>
+	                                <li class="divider"></li>
+	                                <li>
+	                                    <div class="link-block">
+	                                        <a class="J_menuItem" href="mail_compose.html">
+	                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;
+	                                            <strong>写邮件</strong>
+	                                        </a>
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </li>
+	                        <!-- 邮件结束 -->
+	                        
+	                        <!-- 主题 开始 -->
+	                        <!-- <li class="dropdown hidden-xs">
+	                            <a class="right-sidebar-toggle" aria-expanded="false">
+	                                <i class="fa fa-tasks"></i> <span>主题</span>
+	                            </a>
+                        	</li> -->
+                        	<!-- 主题 结束 -->
+	                        
+	                        <!-- 退出按钮开始 -->
+	                        <li class="dropdown" >
+	                        	<a href="/" class="J_tabExit" aria-expanded="false">
+	                    			<i class="fa fa fa-sign-out"></i>退出
+	                    		</a>
+	                        </li>
+	                        <!-- 退出按钮结束 -->
+	                    </ul>
+	                    <!-- 右侧工具结束 -->
+	                </nav>
+	            </div>
+	            <!-- 导航条结束 -->
+	            
+	            <!-- 内容 -->
+	            <div class="row content-tabs">
+	            	
+	            	<!-- 左箭头 -->
+	                <button class="roll-nav roll-left J_tabLeft">
+	                	<i class="fa fa-backward"></i>
+	                </button>
+					<!-- 左箭头 -->
+	                
+	                <!-- 菜单标签开始 -->
+	                <nav class="page-tabs J_menuTabs">
+	                    <div class="page-tabs-content">
+	                        <!-- 选项卡 默认主页需在对应的菜单a元素上添加data-index="0"-->
+	                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+	                    </div>
+	                </nav>
+	                <!-- 菜单标签结束 -->
+	                
+	                <!-- 右箭头 -->
+	                <button class="roll-nav roll-right J_tabRight">
+	                	<i class="fa fa-forward"></i>
+	                </button>
+	                <!-- 右箭头 -->
+	                
+	                <!-- 工具栏开始 -->
+	                <div class="btn-group roll-nav roll-right">
+	                    <button class="dropdown J_tabClose" data-toggle="dropdown"> 
+	                    	关闭操作 
+	                    	<span class="caret"></span>
+	                    </button>
+	                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+	                        <li class="J_tabCloseAll">
+	                        	<a><i class="fa fa-times-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;关闭全部选项卡 </a>
+	                        </li>
+	                        <li class="divider"></li>
+	                        <li class="J_tabCloseOther">
+	                        	<a><i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;关闭其他选项卡 </a>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <!-- 工具栏结束 -->
+	                
+	            </div>
+	            
+	            <div class="row J_mainContent" id="content-main">
+	           		<!-- 内容显示 默认主页需在对应的选项卡a元素上添加data-id="默认主页的url"-->
+	                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1.html" frameborder="0" data-id="index_v1.html" seamless></iframe>
+	            </div>
+	            
+	            <!-- 页脚主容器 开始 -->
+	            <div class="footer">
+	                <div class="pull-right">
+	                	<a href="http://www.liaoyuansoft.com/" target="_blank">&nbsp;燎原软件&nbsp;&copy;&nbsp;2014-2017</a>
+	                </div>
+	            </div>
+	            <!-- 页脚主容器 结束 -->
+	            
+	        </div>
+	        <!--右侧部分结束-->
+	        
+	        <!--右侧边栏 开始-->
+	        <!-- <div id="right-sidebar">
+	        	<div class="sidebar-container">
+	        		<ul class="nav nav-tabs navs-3">
+	        			<li class="active">
+	        				<a data-toggle="tab" href="#tab-1">
+		        				<i class="fa fa-gear"></i><span>主题</span>
+	        				</a>
+                    	</li>
+                    	<li>
+                    		<a data-toggle="tab" href="#tab-2"><span>通知</span></a>
+                    	</li>
+                    	<li>
+                    		<a data-toggle="tab" href="#tab-3"><span>项目进度</span></a>
+                    	</li>
+                    </ul>
+	        
+		            <div id="tab-1" class="tab-pane"></div>
+		            <div id="tab-2" class="tab-pane"></div>
+		            <div id="tab-3" class="tab-pane"></div>
+		            
+	            </div>
+	        </div> -->
+	    	<!--右侧边栏 结束-->
+	    </div>
+	    
+	    <!-- 全局js -->
+	    <script src="../js/jquery.min.js"></script>
+	    <script src="../js/bootstrap.min.js"></script>
+	    <script src="../js/plugins/metisMenu/metisMenu.min.js"></script>
+	    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	    <script src="../js/plugins/layer/layer.min.js"></script>
+	    
+	    <!-- 自定义js -->
+	    <script src="../js/hplus.min.js"></script>
+	    <script src="../js/pages/index.js"></script>
+	    <script src="../js/contabs.min.js"></script>
+	    
+	    <!-- 第三方插件 -->
+	    <script src="../js/plugins/pace/pace.min.js"></script>
+	</body>
+
+</html>

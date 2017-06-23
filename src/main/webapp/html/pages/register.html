@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+        <title>设备管理系统 - 注册</title>
+
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" href="../css/bootstrap.css" >
+        <link rel="stylesheet" href="../css/font-awesome.css" >
+        <link rel="stylesheet" href="../css/plugins/sweetalert/sweetalert.css" >
+        <link rel="stylesheet" href="../css/animate.css" >
+        <link rel="stylesheet" href="../css/plugins/iCheck/custom.css" >
+        <link rel="stylesheet" href="../css/style.css" >
+
+        <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    </head>
+
+    <body class="gainsboro-bg">
+        <div class="middle-box text-center loginscreen animated fadeInDown">
+            <div>
+                <div>
+                    <h1 class="logo-name">管+</h1>
+                </div>
+                <br>
+                <br>
+                <h3>创建一个新账户</h3>
+                <!-- 注册逻辑 开始 -->
+                <!--<div class="form-group">
+                    <input id="cname" name="name" minlength="2" type="text" class="form-control" required="" aria-required="true">
+                </div>
+                <div class="form-group">
+                    <input id="upwd" type="password" class="form-control" placeholder="请输入密码" required="">
+                </div>
+                <div class="form-group">
+                    <input id="rpwd" type="password" class="form-control" placeholder="请再次输入密码" required="">
+                </div>
+                <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                            <input type="checkbox"><i></i>&nbsp;我同意注册协议</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b" onclick="_submit()">注 册</button>
+                <p class="text-muted text-center">
+                    <small>已经有账户了？</small>
+                    <a href="/">点此登录</a>
+                </p>-->
+                <form id="signupForm" class="form-horizontal m-t" method="post">
+                    <div class="form-group">
+                        <input id="firstname" name="firstname" class="form-control" type="text" placeholder="请输入你的姓氏" >
+                    </div>
+                    <div class="form-group">
+                        <input id="lastname" name="lastname" class="form-control" type="text" placeholder="请输入你的名字" >
+                    </div>
+                    <div class="form-group">
+                        <input id="username" name="username" class="form-control" type="text" placeholder="请输入你的用户名" >
+                    </div>
+                    <div class="form-group">
+                        <input id="password" name="password" class="form-control" type="password" placeholder="请输入你的密码" >
+                    </div>
+                    <div class="form-group">
+                        <input id="confirm_password" name="confirm_password" class="form-control" type="password" placeholder="请再次输入你的密码" >
+                    </div>
+                    <div class="form-group">
+                        <input id="email" name="email" class="form-control" type="email" placeholder="请再次输入你的邮箱" >
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意《使用协议》
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- 注册逻辑 结束 -->
+        <!-- 页脚主容器 开始 -->
+        <br>
+        <div style="float: right;">
+            <a href="http://www.liaoyuansoft.com/" target="_blank">&nbsp;燎原软件&nbsp;&copy;&nbsp;2014-2017</a>
+        </div>
+        <!-- 页脚主容器 结束 -->
+        <!-- 全局js -->
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- jQuery Validation plugin javascript-->
+        <script src="../js/plugins/validate/jquery.validate.min.js"></script>
+        <script src="../js/plugins/validate/messages_zh.min.js"></script>
+        <script src="../js/pages/register.js"></script>
+        <!-- iCheck -->
+        <script src="../js/plugins/iCheck/icheck.min.js"></script>
+        <!-- SweetAlert -->
+        <script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+    </body>
+</html>
