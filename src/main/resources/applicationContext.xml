@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- ****************************** 自动扫描注解包 ****************************** -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.lysoft.service, com.lysoft.dao" />
+	<!-- ****************************** 配置属性文件位置 ****************************** -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:Jdbc-Parms.properties</value>
+				<value>classpath:Hibernate-Config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- ****************************** 配置c3p0 ****************************** -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- ****************************** 数据库驱动类 ****************************** -->
+		<property name="driverClass" value="${jdbc.driverClass}" />
+		<!-- ****************************** 数据库连接URL ****************************** -->
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
+		<!-- ****************************** 数据库用户 ****************************** -->
+		<property name="user" value="${jdbc.user}" />
+		<!-- ****************************** 数据库密码 ****************************** -->
+		<property name="password" value="${jdbc.password}" />
+		<!-- ****************************** 连接池中保留的最小连接数 ****************************** -->
+		<property name="minPoolSize" value="${jdbc.miniPoolSize}" />
+		<!-- ****************************** 连接池中保留的最大连接数 ****************************** -->
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+		<!-- ****************************** 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间 ****************************** -->
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
+		<!-- ****************************** 最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃 ****************************** -->
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
+		<!-- ****************************** 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数 ****************************** -->
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
+		<!-- ****************************** 定义在从数据库获取新连接失败后重复尝试的次数 ****************************** -->
+		<property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}" />
+		<!-- ****************************** 两次连接中间隔时间，单位毫秒 ****************************** -->
+		<property name="acquireRetryDelay" value="${jdbc.acquireRetryDelay}" />
+		<!--如果设为true那么在取得连接的同时将校验连接的有效性。Default: false ****************************** -->
+		<property name="testConnectionOnCheckin" value="${jdbc.testConnectionOnCheckin}" />
+		<!--定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个一显著提高测试速度。 ****************************** -->
+		<!-- ****************************** 注意：测试的表必须在初始数据源的时候就存在。Default: null ****************************** -->
+		<property name="preferredTestQuery" value="${jdbc.preferredTestQuery}" />
+		<!-- ****************************** c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。 ****************************** -->
+		<!-- ****************************** 如果定义了这个参数那么属性preferredTestQuery将被忽略。 ****************************** -->
+		<!-- ****************************** 你不能在这张Test表上进行任何操作，它将只供c3p0测试使用。Default: null ****************************** -->
+		<!-- ****************************** <property name="automaticTestTable" value="${jdbc.automaticTestTable}" /> ****************************** -->
+		<!--每隔指定秒数检查所有连接池中的空闲连接。Default: 0 ****************************** -->
+		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" />
+		<!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException,如设为0则无限期等待。单位毫秒。Default: 0 ****************************** -->
+		<property name="checkoutTimeout" value="${jdbc.checkoutTimeout}" />
+	</bean>
+	<!-- ****************************** 配置hibernate session工厂 ****************************** -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- ****************************** 配置需要扫描的包路径，在该包下，所有的类注解配置都会被扫描 ****************************** -->
+		<property name="packagesToScan" value="com.lysoft.entity" />
+		<property name="hibernateProperties">
+			<props>
+				<!-- ****************************** 必要时在数据库新建所有表格 ****************************** -->
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<!-- ****************************** MySQL的方言 ****************************** -->
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<!-- ****************************** 配置current session的上下文环境，方便我们调用sessionFactory获取当前线程统一个session对象 ****************************** -->
+				<prop key="current_session_context_class">thread</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- ****************************** 不破坏数据库,注册SessionFactory ****************************** -->
+	<!-- ****************************** 配置事务管理器 ****************************** -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor"> -->
+	<!-- <property name="transactionManager" ref="transactionManager"></property> -->
+	<!-- <property name="transactionAttributes"> -->
+	<!-- <props> -->
+	<!-- ****************************** PROPAGATION_REQUIRED : 如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。这是最常见的选择。 ****************************** -->
+	<!-- ****************************** PROPAGATION_SUPPORTS : 支持当前事务，如果当前没有事务，就以非事务方式执行。 ****************************** -->
+	<!-- ****************************** PROPAN_MANDATORY : 使用当前的事务，如果当前没有事务，就抛出异常。  ****************************** -->
+	<!-- ****************************** PROPAGATION_REQUIRES_NEW : 新建事务，如果当前存在事务，把当前事务挂起。 ****************************** -->
+	<!-- ****************************** PROPAGATION_NOT_SUPPORTED : 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。  ****************************** -->
+	<!-- ****************************** PROPAGATION_NEVER : 以非事务方式执行，如果当前存在事务，则抛出异常。 ****************************** -->
+	<!-- ****************************** PROPAGATION_NESTED : 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。 ****************************** -->
+	<!-- <prop key="save*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="update*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="delete*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="find*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="get*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="execute*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="load*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="merge*">PROPAGATION_REQUIRED</prop> -->
+	<!-- <prop key="add*">PROPAGATION_REQUIRED</prop> -->
+	<!-- </props> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<!-- ****************************** 自动代理事物 定义事务处理代理bean,他需要两个属性,一个是指定需要代理的bean,另一个是代理bean所需的事务拦截器 ****************************** -->
+	<!--<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> -->
+	<!-- <property name="beanNames"> -->
+	<!-- <list> -->
+	<!-- <value>*Service</value> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- <property name="interceptorNames"> -->
+	<!-- <list> -->
+	<!-- <value>transactionInterceptor</value> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!--</bean> -->
+	<!-- ****************************** 注解方式配置事物 ****************************** -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
